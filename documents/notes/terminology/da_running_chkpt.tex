@@ -1,0 +1,221 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\definecolor{light-gray}{gray}{0.95}
+\newcommand{\code}[1]{\colorbox{light-gray}{\texttt{#1}}}
+
+ \def\code#1{\texttt{#1}}
+ \def\Var{\ensuremath\mathrm{Var}}
+ 
+ %\usepackage{minted} 	
+%\setminted[python]{breaklines, framesep=2mm, fontsize=\footnotesize, numbersep=5pt}
+
+%SetFonts
+
+%SetFonts
+
+
+\title{Iron Hack Data Analytics Course Notes}
+\author{P. Zimmerman}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+\section{Acronyms}
+\begin{itemize}
+\item EDA \-- Exploratory Data Analysis. (Interact with through visualization of stats)
+\item ETL \-- Extract, Transform, and Load
+\item CRUDE \-- create, update, extract?
+\item MAE \-- mean absolute error
+\end{itemize}
+
+\section{General DA Terminology}
+\begin{itemize}
+\item  Descriptive vs Predictive analytics 
+\item \textbf{supervised learning algorithms} Algorithms which experience a dataset containing features,
+but each example is also associated with a label or target.
+\end{itemize}
+
+\section{
+Key Performance Indicators (KPIs)}
+\hspace{1cm}\begin{itemize}
+\item
+• are performance markers forming the core of every business. KPIs serve to provide information about where to dedicate resources, focus sales, optimise costs, and other underlying overarching objectives.  \newline
+
+• Profit = Revenue - Expenses \newline
+
+• Gross Profit = Revenue - Direct Costs \newline
+ (related to what’s being sold, server costs, essential costs per product item) \newline
+
+• Net Profit = Gross Profit - Indirect Costs\newline
+ (salaries, rent, etc) \newline
+
+• Retention Rate = 1 - Churn Rate \newline
+
+• Outcomes\newline
+
+• Conversion Rate - How many visitors/users become customers (marketing funnel)
+\end{itemize}
+
+
+
+\section{Data Wrangling}
+
+• rename columns in lower case to be more descriptive (using functions). Option in- place=True reassigns the variable when renaming.  \newline
+
+• Cleaning: df.info() check  \newline
+
+1. Look for format. Are the quantities “objects”?  \newline
+
+2. Average values for large numbers (income) are often ints 3. Average values for lower numbers ( ) could be floats  \newline
+
+\section{Health care for all study}
+• {} \newline 
+ 
+• Assumptions: people who have donated in the past will donate again and those who lapsed
+ are are unlikely do donate again. Linear regression criteria. 
+  \newline
+ 
+• target variable : \code{target\_d} is total amount donated  \newline
+
+• Objective : Profit, given costs like mailing asking for donations. Use machine learning (linear regression) to produce a ranking of donors by how likely they are to respond and how much they are likely to donate.
+.\newline
+ 
+• important input variables 
+ 
+• Observation: Donors who donated large amounts are less likely to respond to the mail. 
+Inverse correlation between amount and response.  \newline
+
+• From the sample, we want to build a model which predicts who is going donate the most amount of money. Only including those who are most likely to respond is biased to low dollar amount donors.  \newline
+
+
+
+• Assumption is that the highest value donors have the largest average donations.  \newline
+
+
+
+\section{Car Insurance Policy study}
+• Assumptions: Linear regression criteria. \newline
+
+••••••
+
+• Target variable : \code{customer\_premium\_auto} \newline
+ 
+• Observations:  See plots from 21/06/2022 \newline
+
+• Objective : Find out what's influencing policy costs using machine learning (regression) to produce a model predicting customer premiums from variables like policy\_type and vehicle\_size.\newline
+
+• Important features 
+\begin{itemize}
+\item \code{monthly\_premium\_auto} is input feature most correlated with the target variable, carrying a Pearson coefficient of $r=0.63$.  
+\item In the model, where we have used encoded categorical variables, we find that the most important features are
+\begin{enumerate}
+\item \code{encode\_location\_code\_suburban}
+\item \code{encode\_location\_code\_urban}
+\item \code{encode\_location\_code\_rural}
+\item \code{encode\_coverage\_basic}
+\item \code{encode\_coverage\_extended}
+\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+\section{Modeling}
+\item  classification - for categorical (discrete) variables. Predict letters, animal type, facial
+recognition for race/gender.
+\item \textbf{linear regression} - . Extrapolations based on fitting data
+\item Input:  features/ explanatory variables/predictor variables/independent variables
+\item Output:  labels/target/explained variable/predicted variable/dependent variable/$y$
+\item  Linear Regression Assumptions
+\begin{enumerate}
+\item Linearity
+\item Independency
+\item Normalcy of residual errors 
+\item Homoscedasticity
+\end{enumerate}
+\item regressor -  variables in a regression model, excluding the constant
+\item Standardization : standardization, where the fields are transformed to have zero mean and unit variance, is a common preprocessing routine useful (or even necesssary) for optimal predictability of several many machine learning estimator algorithms (such as the RBF kernel of Support Vector Machines or the L1 and L2 regularizers of linear models) implemented which are implemented scikit-learn. 
+\item test/train split
+\item  A design
+matrix, usually denoted $X$, is a table containing a diﬀerent observation in each row. Each column of the
+matrix corresponds to a diﬀerent feature. 
+\item Z\-variable $z=(x-\mu)/{\sigma}$ and its lookup table. 
+\item 95\% confidence interval
+\item Z-test and two-tail test (2.5\%: $z = 1.96$) one-tail test (5\%: $z = 1.65$) 
+\item degrees of freedom $\mathrm{dof}=n-1$, where $n$ is the number of examples (rows).
+
+%
+\item \textbf{mean squared error} 
+\begin{equation}
+\mathrm{MSE}_{\rm test} = \frac{1}{m} \sum (\hat{\vec y}{}^{(\rm test)} - \vec{y}{}^{(\rm test)})_{i}^{2},\\
+\end{equation}
+%
+where $\hat y$ is the model outcome. If $y$ is new data not found in the training set, then the MSE refers 
+to the so-called \emph{generalization error}.
+\item  The coefficient of determination ($R^{2}$ measure),
+\begin{equation}
+R^{2}= 1 - \frac{\sum(y-\hat y)^{2}}{\sum(y-\bar y)^{2}},
+\end{equation}
+where $y$ is the true value, $\hat y$ is the predicted target variable, $\bar y$ is the sample mean, and the sum is
+over all the samples. For data centered around the mean $\bar y = 0$, 
+\begin{equation}
+R^{2} = 1 - \frac{\mathrm{Var}(y-\hat y)}{\mathrm Var(y)}, \qquad \bar y =0.
+\end{equation}
+The value of $R^{2}$ increases with the number of variables, as it assumes that each variable is influencing the prediction 
+of the target variable regardless of feature importance (really?) .
+A related quantity 
+\[ R^{2}_{adj} = 1-\frac{(n-1)(1-R^{2})}{(n-1-k)}\] is more robust to overfitting, as it only assumes that the model is affected by important features. The adjusted $R^{2}$ will penalise you for adding independent variables (via $k$ in the equation) that do not fit the model. Why? In regression analysis, it can be tempting to add more variables to the data as you think of them. Some of those variables will be significant, but you can’t be sure that significance is just by chance. The adjusted R2 will compensate for this by that penalizing you for those extra variables.
+
+%\item \textbf{Vapnik-Chervonenkis dimension (VC dimension)} -  The VC dimension measures the capacity of a binary classiﬁer. The
+%VC dimension is deﬁned as being the largest possible value of $m$
+%for which there exists a training set of $m$ diﬀerent $\vec x$ points that the classiﬁer can label arbitrarily.
+\item  \textbf{regularization} - Regularization is any modiﬁcation we make to a
+learning algorithm that is intended to reduce its generalization error but not its
+training error.
+\item \textbf{validation set} - A set
+of samples, which the training
+algorithm does not observe, used to estimate generalization error and guide selection of hyperparameters.
+\item \textbf{cross validation} - It is used to estimate generalization error of a learning algorithm when the given dataset is too
+small for a simple train/test or train/valid split to yield accurate estimation of
+generalization error, because the mean of a loss
+on a small test set may have too
+high a variance. 
+\item \textbf{Point estimator or statistic} A general function of the data $\hat{\vec\theta} = g(\vec x_{1}, \ldots , \vec x_{n})$.
+\item \textbf{bias} 
+\begin{equation}
+\mathrm{bias}(\hat{\vec{\theta}}) = \mathbb{E}(\hat{\vec{\theta}}) - \vec\theta.
+\end{equation}
+The bias of an estimator is related to the variance by
+\begin{align}
+\mathrm{MSE} &= \mathbb{E}[(\hat{\vec\theta}-\vec\theta)^{2}], \\
+		     &= \mathrm{bias}^{2}(\hat{\vec\theta}) -\mathrm{Var}(\vec\theta).
+\end{align}
+There is a tradeoff between bias and variance related to under of overfitting.
+
+\item \textbf{likelihood function} - joint probability of the observed data viewed as a function of the parameters of the chosen statistical model, $\mathcal L(\vec \theta \vert \vec x) = p_{\rm model}(\vec x; \vec \theta)$. It is viewed as a function of parameters $\vec\theta$ with the observations fixed.
+\item maximum likelihood estimator
+\end{itemize}
+
+
+
+
+\section{Relational Databases (RDMS)}
+Structured Query Langauge
+Postgre, MySQL, BigQuery, Amazon REDSHIFT
+Structured data (e.g. columns and rows) stored in several related tables (pandas DFs).
+Fixed scheme
+ACID compliancy (atomic,consistent,isolated,durable) normalized data
+1. In SQL the “schema” is the database
+2. CRUD operations
+3. data types: binary=boolean
+4. data encoding (unicode character: utf-8 is most popular and can support chinese and arabic)
+5. SQL tables are saved in the disk, in comparison with pandas DFs which are saved in RAM
+6. Use SQL dump to recreate table. Server/Data Export
+
+\end{document}  
